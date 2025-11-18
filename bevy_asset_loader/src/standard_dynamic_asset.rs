@@ -1,6 +1,6 @@
 use crate::dynamic_asset::{DynamicAsset, DynamicAssetType};
 use crate::dynamic_asset::{DynamicAssetCollection, DynamicAssets};
-use bevy_asset::{Asset, AssetServer, Assets, LoadedFolder, UntypedHandle};
+use bevy_asset::{Asset, AssetServer, Assets, LoadedFolder, UntypedAssetId, UntypedHandle, VisitAssetDependencies};
 use bevy_ecs::{
     change_detection::Res,
     system::{Command, SystemState},
@@ -438,8 +438,14 @@ impl DynamicAsset for Vec<StandardDynamicAsset> {
 ///     mixed_handlers: Vec<UntypedHandle>,
 /// }
 /// ```
-#[derive(Deserialize, Serialize, Asset, TypePath, PartialEq, Debug)]
+#[derive(Deserialize, Serialize, TypePath, PartialEq, Debug)]
 pub struct StandardDynamicAssetArrayCollection(HashMap<String, Vec<StandardDynamicAsset>>);
+
+impl VisitAssetDependencies for StandardDynamicAssetArrayCollection {
+    fn visit_dependencies(&self, _visit: &mut impl FnMut(UntypedAssetId)) {}
+}
+
+impl Asset for StandardDynamicAssetArrayCollection {}
 
 impl DynamicAssetCollection for StandardDynamicAssetArrayCollection {
     fn register(&self, dynamic_assets: &mut DynamicAssets) {

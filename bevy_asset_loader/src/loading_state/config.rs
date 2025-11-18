@@ -13,7 +13,6 @@ use crate::loading_state::{
 use bevy_app::App;
 use bevy_asset::Asset;
 use bevy_ecs::{
-    error::BevyError,
     resource::Resource,
     schedule::{IntoScheduleConfigs, ScheduleConfigs},
     world::FromWorld,
@@ -66,9 +65,8 @@ pub trait ConfigureLoadingState {
     fn init_resource<R: Resource + FromWorld>(self) -> Self;
 }
 
-type SchedulConfig = ScheduleConfigs<
-    Box<(dyn bevy_ecs::system::System<In = (), Out = Result<(), BevyError>> + 'static)>,
->;
+type SchedulConfig =
+    ScheduleConfigs<Box<dyn bevy_ecs::system::System<In = (), Out = ()> + 'static>>;
 
 /// Can be used to add new asset collections or similar configuration to a loading state.
 /// ```edition2021
