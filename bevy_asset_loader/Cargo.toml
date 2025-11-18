@@ -50,7 +50,7 @@ bevy_asset_loader_derive = { version = "0.24.0", path = "../bevy_asset_loader_de
 anyhow = "1"
 path-slash = "0.2"
 
-bevy_common_assets = { path = "../../bevy_common_assets", features = ["ron"], optional = true }
+bevy_common_assets = { git = "https://github.com/NiklasEi/bevy_common_assets", features = ["ron"], optional = true }
 serde = { version = "1", optional = true }
 iyes_progress = { version = "0.14.0", optional = true }
 
@@ -58,7 +58,7 @@ iyes_progress = { version = "0.14.0", optional = true }
 bevy = { git = "https://github.com/happyrust/bevy", features = ["vorbis"] }
 anyhow = "1"
 iyes_progress = { version = "0.14.0" }
-bevy_common_assets = { path = "../../bevy_common_assets", features = ["ron"] }
+bevy_common_assets = { git = "https://github.com/NiklasEi/bevy_common_assets", features = ["ron"] }
 serde = { version = "1" }
 ron = "0.8.1"
 trybuild = { version = "1.0" }
